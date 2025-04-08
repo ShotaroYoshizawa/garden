@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RARMEN</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: yellow;
+      padding: 10px 0;
+      text-align: center;
+      z-index: 1;
+    }
+
+    header nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    footer {
+      width: 100%;
+      background: yellow;
+      padding: 10px 0;
+      text-align: center;
+      z-index: 1;
+    }
+
+    footer nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    .subTitle {
+      align-self: flex-start;
+      margin-left: 20px;
+    }
+
+    #top {
+      background: url('Top.png') no-repeat center center;
+      position: relative;
+    }
+
+    .top-title {
+      position: absolute;
+      top: 50%;
+      text-align: center;
+    }
+
+    #news {
+      background: rgb(255, 252, 153);
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    #news a {
+      color: #222;
+      text-decoration: none;
+    }
+
+    #news li {
+      list-style: none;
+    }
+
+    .news-content01 {
+      width: 300px;
+      height: 100%;
+    }
+
+    .news-content02 {
+      width: 100%;
+    }
+
+    .news-tr {
+      /*height: 100px;*/
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid rgb(255, 247, 0);
+      transition: background 0.3s ease;
+    }
+
+    .news-tr:hover {
+      background: rgb(255, 247, 0);
+    }
+
+    .news-tr div {
+      padding: 20px;
+    }
+
+    .news-td-date {
+      width: 150px;
+    }
+
+    .news-td-title {
+      width: 250px;
+    }
+
+    .news-td-img {
+      width: 200px;
+    }
+
+    .news-td-more {
+      width: 150px;
+    }
+
+    .news-td-img div {
+      height: 150px;
+      width: 150px;
+      background: gray;
+    }
+
+
+    #about {
+      background: rgb(255, 247, 0);
+      width: 100%;
+    }
+
+    #about .content {
+      display: flex;
+    }
+
+    #about .content div {
+      flex: 1;
+      padding: 20px;
+    }
+
+    #about .content .placeholder {
+      width: 50%;
+      height: 300px;
+      background: gray;
+    }
+
+    #service {
+      width: 100%;
+      text-align: center;
+    }
+
+    #service .content {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    #service .content div {
+      writing-mode: vertical-rl;
+      border: 2px solid black;
+      padding: 10px;
+      width: 80px;
+      height: 300px;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      cursor: pointer;
+    }
+
+    #service .content div .detail {
+      display: none;
+    }
+
+    #service .content div:hover {
+      width: 240px;
+    }
+
+    #service .content div:hover .detail {
+      display: block;
+    }
+
+    #furture {
+      background: rgb(255, 252, 153);
+    }
+
+    #furture .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .furture-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .furture-item p {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .arrow {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    #topics {
+      background: rgb(255, 247, 0);
+    }
+
+    #topics .content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    #topics .content .item {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .item-img {
+      width: 150px;
+      height: 150px;
+      background: lightgray;
+    }
+
+    #company {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="#top">TOP</a>
+      <a href="#news">NEWS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#service">SERVICE</a>
+      <a href="#furture">FURTURE</a>
+      <a href="#topics">TOPICS</a>
+      <a href="#company">COMPANY</a>
+    </nav>
+  </header>
+
+  <section id="top">
+    <div class="top-title">
+      <h1>RARMEN</h1>
+      <p>美味しいラーメンを、もっと楽しく</p>
+    </div>
+  </section>
+  <div id="data">
+    <p>住所</p>
+    <p>営業時間</p>
+
+  </div>
+
+  <section id="news">
+    <div class="news-content01">
+      <h2 class="subTitle">NEWS</h2>
+    </div>
+    <div class="news-content02">
+      <ul>
+        <li><a href="#">
+            <div class="news-tr">
+              <div class="news-td-date">2025-04-01</div>
+              <div class="news-td-title">新メニュー登場！</div>
+              <div class="news-td-img">
+                <div></div>
+              </div>
+              <div class="news-td-more">more > </div>
+            </div>
+          </a></li>
+        <li><a href="#">
+            <div class="news-tr">
+              <div class="news-td-date">2025-03-25</div>
+              <div class="news-td-title">春のキャンペーン開始</div>
+              <div class="news-td-img">
+                <div></div>
+              </div>
+              <div class="news-td-more">more > </div>
+            </div>
+          </a></li>
+        <li><a href="#">
+            <div class="news-tr">
+              <div class="news-td-date">2025-03-20</div>
+              <div class="news-td-title">新店舗オープン</div>
+              <div class="news-td-img"></div>
+              <div class="news-td-more">more > </div>
+            </div>
+          </a></li>
+      </ul>
+    </div>
+
+  </section>
+
+  <section id="about">
+    <h2 class="subTitle">ABOUT</h2>
+    <div class="content">
+      <div>
+        <p>私たちのラーメンは、こだわりの素材で作られています。</p>
+      </div>
+      <div class="placeholder"></div>
+    </div>
+  </section>
+
+  <section id="service">
+    <h2 class="subTitle">SERVICE</h2>
+    <div class="content">
+      <div>
+        <span class="title">麺</span>
+        <span class="detail">小麦粉を使用し、コシのある食感が特徴。</span>
+      </div>
+      <div>
+        <span class="title">スープ</span>
+        <span class="detail">豚骨や鶏ガラを長時間煮込んで旨味を抽出。</span>
+      </div>
+      <div>
+        <span class="title">チャーシュー</span>
+        <span class="detail">じっくり煮込んで柔らかく仕上げた豚肉。</span>
+      </div>
+      <div>
+        <span class="title">メンマ</span>
+        <span class="detail">発酵させたタケノコを使用し、風味豊か。</span>
+      </div>
+      <div>
+        <span class="title">ネギ</span>
+        <span class="detail">薬味として風味を引き立てる重要な食材。</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="furture">
+    <h2 class="subTitle">FURTURE</h2>
+    <div class="content">
+      <div class="furture-item">
+        <p>未来のラーメン</p>
+        <p>私たちは新しいラーメンを探求し続けます。</p>
+        <div class="arrow">↓</div>
+      </div>
+      <div class="furture-item">
+        <p>革新のスープ</p>
+        <p>独自の技術でスープを進化させます。</p>
+        <div class="arrow">↓</div>
+      </div>
+      <div class="furture-item">
+        <p>世界展開</p>
+        <p>世界中にRARMENの味を届けます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <h2 class="subTitle">TOPICS</h2>
+    <div class="content">
+      <div class="item">
+        <div class="item-img"></div>新しい試み
+      </div>
+      <div class="item">
+        <div class="item-img"></div>イベント情報
+      </div>
+      <div class="item">
+        <div class="item-img"></div>お客様の声
+      </div>
+      <div class="item">
+        <div class="item-img"></div>コラボ企画
+      </div>
+      <div class="item">
+        <div class="item-img"></div>人気ランキング
+      </div>
+      <div class="item">
+        <div class="item-img"></div>新店舗情報
+      </div>
+      <div class="item">
+        <div class="item-img"></div>スタッフ紹介
+      </div>
+      <div class="item">
+        <div class="item-img"></div>こだわりの材料
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <h2 class="subTitle">COMPANY</h2>
+    <p>会社概要: RARMEN 株式会社</p>
+  </section>
+
+
+  <footer>
+    <nav>
+      <a href="#top">TOP</a>
+      <a href="#news">NEWS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#service">SERVICE</a>
+      <a href="#furture">FURTURE</a>
+      <a href="#topics">TOPICS</a>
+      <a href="#company">COMPANY</a>
+    </nav>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sections = document.querySelectorAll("section");
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, { threshold: 0.2 });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+
+</html>
