@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 830px;
+      overflow: hidden;
+      height: 350px;
+    }
+
+    .slider-container {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: fit-content;
+    }
+
+    .slide {
+      width: 200px;
+      height: 100%;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .img {
+      width: 200px;
+      height: 145px;
+      border-radius: 10px;
+    }
+
+    /* 擬似画像に色をつける */
+    .fake-img1 {
+      background: #ff6666;
+    }
+
+    .fake-img2 {
+      background: #ff9999;
+    }
+
+    .fake-img3 {
+      background: #66ccff;
+    }
+
+    .fake-img4 {
+      background: #99ddff;
+    }
+
+    .fake-img5 {
+      background: #66ff66;
+    }
+
+    .fake-img6 {
+      background: #99ff99;
+    }
+
+    .fake-img7 {
+      background: #cc66ff;
+    }
+
+    .fake-img8 {
+      background: #dd99ff;
+    }
+
+    .slide-item {
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .imag-label {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 4px;
+      color: #333;
+    }
+
+    .imag-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="slider-wrapper">
+    <div class="slider-container">
+
+      <div class="slide">
+        <div class="slide-item">
+          <div class="img fake-img1"></div>
+          <div class="imag-label">Image 1</div>
+        </div>
+        <div class="slide-item">
+          <div class="img fake-img2"></div>
+          <div class="imag-label">Image 2</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-item">
+          <div class="img fake-img3"></div>
+          <div class="imag-label">Image 3</div>
+        </div>
+        <div class="slide-item">
+          <div class="img fake-img4"></div>
+          <div class="imag-label"></div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-item">
+          <div class="img fake-img5"></div>
+          <div class="imag-label"></div>
+        </div>
+        <div class="slide-item">
+          <div class="img fake-img6"></div>
+          <div class="imag-label">Image 6</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-item">
+          <div class="img fake-img7"></div>
+          <div class="imag-label">Image 7</div>
+        </div>
+        <div class="slide-item">
+          <div class="img fake-img8"></div>
+          <div class="imag-label">Image 8</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-item">
+          <div class="img fake-img5"></div>
+          <div class="imag-label"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 操作用ボタン -->
+    <button class="imag-nav prev">←</button>
+    <button class="imag-nav next">→</button>
+  </div>
+
+  <script>
+    // スライダーの親コンテナを取得
+    const slider = document.querySelector('.slider-container');
+
+    // 元のスライドセットを取得し、複製してループ表示用に追加
+    const originalSlides = Array.from(document.querySelectorAll('.slide'));
+    originalSlides.forEach(slide => {
+      const clone = slide.cloneNode(true); // 深い複製
+      slider.appendChild(clone);
+    });
+
+    // 全スライドを再取得（複製後）
+    const allSlides = document.querySelectorAll('.slide');
+
+    // 1セット分のスライド幅（マージン込み）
+    const slideWidth = allSlides[0].offsetWidth + 10;
+
+    // 実際のスライドセット数（ループ前）
+    const totalOriginalSlides = originalSlides.length;
+
+    // 現在のインデックス、フラグ類
+    let currentIndex = 0;
+    let timerId;
+
+    /**
+     * スライドの位置を更新（アニメーション付き）
+     */
+    function updateSlide() {
+      slider.style.transition = 'transform 0.5s ease';
+      slider.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+    }
+
+    /**
+     * 次のスライドに移動
+     */
+    function nextSlide() {
+      currentIndex++;
+
+      if (currentIndex >= totalOriginalSlides + 1) {
+        // 末尾を超えた場合、瞬時に先頭に戻しアニメーションを再適用
+        currentIndex = 0;
+        slider.style.transition = 'none';
+        slider.style.transform = `translateX(0px)`;
+
+        // 2フレーム後にスライドを1つ進めてアニメーション再開
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            currentIndex = 1;
+            updateSlide();
+          });
+        });
+      } else {
+        updateSlide();
+      }
+    }
+
+    /**
+     * 前のスライドに移動
+     */
+    function prevSlide() {
+      currentIndex--;
+
+      if (currentIndex < 0) {
+        // 先頭を超えた場合、末尾の複製部分に瞬時に移動
+        currentIndex = totalOriginalSlides;
+        slider.style.transition = 'none';
+        slider.style.transform = `translateX(${-slideWidth * totalOriginalSlides}px)`;
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            currentIndex = totalOriginalSlides - 1;
+            updateSlide();
+          });
+        });
+      } else {
+        updateSlide();
+      }
+    }
+
+    /**
+     * 自動スライド開始
+     */
+    function startAutoSlide() {
+      timerId = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
+
+    // ナビゲーションボタンにイベントを追加
+    document.querySelector('.next').addEventListener('click', () => {
+      nextSlide();
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+      prevSlide();
+    });
+
+    // 最初に自動スライド開始
+    startAutoSlide();
+  </script>
+
+</body>
+</html>

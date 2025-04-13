@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #service {
+            width: 100%;
+            text-align: center;
+        }
+
+        #service .content {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .service-item {
+            position: relative;
+            color: #fff;
+            border: 2px solid black;
+            width: 80px;
+            height: 300px;
+            overflow: hidden;
+            transition: width 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-title {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .service-detail {
+            display: none;
+            writing-mode: horizontal-tb;
+            position: absolute;
+            background: #ff701e;
+            left: 0;
+            bottom: 0;
+        }
+
+        .service-item:hover {
+            width: 300px;
+        }
+
+        .service-item:hover .service-title {
+            display: none;
+        }
+
+        .service-item:hover .service-detail {
+            display: block;
+        }
+
+        .service-image {
+            width: 200px;
+            height: 100%;
+            background-color: gray;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .service-img1 {
+            background: url('./img/Top.png') no-repeat center center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="service">
+        <h2 class="subTitle">SERVICE</h2>
+        <div class="content">
+            <div class="service-item service-img1">
+                <div class="service-title">麺</div>
+                <div class="service-detail">小麦粉を使用し、コシのある食感が特徴。</div>
+            </div>
+            <div class="service-item service-img1">
+                <div class="service-title">スープ</div>
+                <div class="service-detail">豚骨や鶏ガラを長時間煮込んで旨味を抽出。</div>
+            </div>
+            <div class="service-item service-img1">
+                <div class="service-title">チャーシュー</div>
+                <div class="service-detail">じっくり煮込んで柔らかく仕上げた豚肉。</div>
+            </div>
+            <div class="service-item service-img1">
+                <div class="service-title">メンマ</div>
+                <div class="service-detail">発酵させたタケノコを使用し、風味豊か。</div>
+            </div>
+            <div class="service-item service-img1">
+                <div class="service-title">ネギ</div>
+                <div class="service-detail">薬味として風味を引き立てる重要な食材。</div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
