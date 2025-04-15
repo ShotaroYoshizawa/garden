@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <script>
+
+        const w = 400;
+        const h = 400;
+        const n = 4;
+        const size = 100;
+        const bulge = 1.2; //葉の膨らみ
+
+        function setup() {
+            createCanvas(w, h);
+            background(0);
+        }
+
+        function draw() {
+            background(200);
+            const ox = w / 2;
+            const oy = h / 2;
+
+            push();
+            noStroke();
+            translate(ox, oy);
+            beginShape();
+            for (let t = 0; t < 360 / n; t++) {
+                A = (n / PI) * radians(t);
+
+                md = floor(A) % 2;
+
+                r = pow(-1, md) * (A - floor(A)) + md;
+
+                R = r;
+
+                x = size * R * cos(bulge * radians(t));
+                y = size * R * sin(radians(t));
+
+                vertex(x, y);
+            }
+
+            endShape(CLOSE);
+            pop();
+        }
+
+
+
+    </script>
+</body>
+
+</html>

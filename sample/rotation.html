@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Circle Navigation</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      /* overflow-x: hidden; */
+    }
+
+    section {
+      height: 100vh;
+    }
+
+    /* セクションカラー */
+    #section1 h2 {
+      background: #f44336;
+    }
+
+    #section2 h2 {
+      background: #e91e63;
+    }
+
+    #section3 h2 {
+      background: #9c27b0;
+    }
+
+    #section4 h2 {
+      background: #3f51b5;
+    }
+
+    #section5 h2 {
+      background: #03a9f4;
+    }
+
+    #section6 h2 {
+      background: #4caf50;
+    }
+
+    .title {
+      position: sticky;
+      top: 0;
+      padding: 35px 0 0 0;
+      margin: 0;
+      z-index: 10;
+    }
+
+    .title h2 {
+      height: 40px;
+      padding: 7px 0 5px 10px;
+      margin: 0 0 0 210px;
+      font-size: 24px;
+      color: #fff;
+      border-bottom: 1px solid #ccc;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    /* ナビゲーション */
+    .circle-nav {
+      position: fixed;
+      top: 40px;
+      left: 40px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .circle-nav .dot {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      pointer-events: auto;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="section1">
+    <div class="title">
+      <h2>section1</h2>
+    </div>
+  </section>
+  <section id="section2">
+    <div class="title">
+      <h2>section2</h2>
+    </div>
+  </section>
+  <section id="section3">
+    <div class="title">
+      <h2>section3</h2>
+    </div>
+  </section>
+  <section id="section4">
+    <div class="title">
+      <h2>section4</h2>
+    </div>
+  </section>
+  <section id="section5">
+    <div class="title">
+      <h2>section5</h2>
+    </div>
+  </section>
+  <section id="section6">
+    <div class="title">
+      <h2>section6</h2>
+    </div>
+  </section>
+
+  <div class="circle-nav" id="circleNav"></div>
+
+  <script>
+    const colors = [
+      '#f44336', '#e91e63', '#9c27b0', '#3f51b5', '#03a9f4', '#4caf50'
+    ];
+
+    const nav = document.getElementById('circleNav');
+    const dotCount = colors.length;
+    const radius = 50;
+    const dots = [];
+
+    for (let i = 0; i < dotCount; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      dot.style.backgroundColor = colors[i];
+      dot.addEventListener('click', () => {
+        document.getElementById(`section${i + 1}`).scrollIntoView();
+      });
+      nav.appendChild(dot);
+      dots.push(dot);
+    }
+
+    function updateDots(scrollPos) {
+      const sectionHeight = window.innerHeight;
+      const index = Math.round(scrollPos / sectionHeight - 1 / 3);
+      const angleOffset = index * (360 / dotCount);
+
+      dots.forEach((dot, i) => {
+        const angle = ((360 / dotCount) * i - angleOffset) * (Math.PI / 180);
+        const x = radius * Math.cos(angle);
+        const y = radius * Math.sin(angle);
+        dot.style.transform = `translate(${x + 75}px, ${y + 5}px) scale(1)`;
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      updateDots(window.scrollY);
+    });
+
+    // 初期表示
+    updateDots(0);
+  </script>
+</body>
+
+</html>

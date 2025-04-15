@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>点描 芽アニメ</title>
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+
+        // 点の数とオブジェクト配列
+        const POINT_COUNT = 500;
+        const points = [];
+
+        // シンプルな双葉の形（目標座標）
+        const leafShape = [];
+        for (let i = 0; i < POINT_COUNT; i++) {
+            let angle = Math.random() * Math.PI;
+            let r = 40 + Math.random() * 30;
+
+            // 左の葉
+            if (i < POINT_COUNT / 3) {
+                let x = Math.cos(angle) * r - 50;
+                let y = - Math.sin(angle) * r / 2;
+                
+                leafShape.push({ x, y });
+            } else if (i < POINT_COUNT * 2 / 3) {
+                // 右の葉
+                let x = Math.cos(angle) * r + 50;
+                let y = - Math.sin(angle) * r / 2;
+                leafShape.push({ x, y });
+            } else {
+                let x = Math.sin(angle) * r / 4;
+                let y = (Math.cos(angle) + Math.PI / 4) * r;
+                leafShape.push({ x, y });
+            }
+        }
+
+        
+        // const leafShape2 = [];
+        // for (let i = 0; i < POINT_COUNT; i++) {
+        //     let angle = Math.random() * Math.PI;
+        //     let r = 40 + Math.random() * 30;
+
+        //     // 左の葉
+        //     if (i < POINT_COUNT / 3) {
+        //         let x = Math.cos(angle) * r - 50;
+        //         let y = - Math.sin(angle) * r / 2 - (Math.PI / 2) * r;
+                
+        //         leafShape2.push({ x, y });
+        //     } else if (i < POINT_COUNT * 2 / 3) {
+        //         // 右の葉
+        //         let x = Math.cos(angle) * r + 50;
+        //         let y = - Math.sin(angle) * r / 2- (Math.PI / 2) * r;
+        //         leafShape2.push({ x, y });
+        //     } else {
+        //         let x = -Math.sin(angle) * r / 4;
+        //         let y = (Math.cos(angle) - Math.PI / 4) * r;
+        //         leafShape2.push({ x, y });
+        //     }
+        // }
+
+
+        // 点の初期化（ランダムな場所からスタート）
+        for (let i = 0; i < POINT_COUNT; i++) {
+            points.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                tx: w / 2 + leafShape[i].x,
+                ty: h / 2 + leafShape[i].y,
+                vx: 0,
+                vy: 0
+            });
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(17, 17, 17, 0.2)';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.fillStyle = '#66ff66';
+            for (let p of points) {
+                // 点が目標に近づくように速度を変える
+                let dx = p.tx - p.x;
+                let dy = p.ty - p.y;
+                p.vx += dx * 0.01;
+                p.vy += dy * 0.01;
+                p.vx *= 0.9; // 減速
+                p.vy *= 0.9;
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // 描画
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>
