@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>セクションタイトル固定表示</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    section {
+      height: 100vh;
+      padding-top: 3rem;
+      box-sizing: border-box;
+      background: #d0e0ff;
+    }
+
+    h2 {
+      margin: 0;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      font-size: 1.5rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .spacer {
+      height: 100vh;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <section>
+    <h2 class="fade-in-up">セクション 1</h2>
+  </section>
+  <div class="spacer"></div>
+  <section>
+    <h2 class="fade-in-up">セクション 2</h2>
+  </section>
+  <div class="spacer"></div>
+  <section>
+    <h2 class="fade-in-up">セクション 3</h2>
+  </section>
+  <div class="spacer"></div>
+  <section>
+    <h2 class="fade-in-up">セクション 4</h2>
+  </section>
+
+  <script>
+    const sections = document.querySelectorAll("section");
+
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const h2 = entry.target.querySelector("h2");
+        if (entry.isIntersecting) {
+          h2.classList.add('visible');
+        } else {
+          h2.classList.remove('visible');
+        }
+      });
+    }, options);
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+
+</html>

@@ -23,76 +23,78 @@
 
   <section id="top">
     <img src="./img/Top.png" alt="ラーメン" class="top-img">
-    <div class="top-title">
+    <div class="title">
       <h1>RARMEN</h1>
       <p>美味しいラーメンを、もっと楽しく</p>
     </div>
   </section>
   <section id="data">
-    <p>住所</p>
-    <p>営業時間</p>
+    <div class="content top">
+      <p>住所</p>
+      <p>営業時間</p>
+    </div>
   </section>
 
-  <section id="news">
-    <div class="news-content01">
+  <section id="news" class="flexbox">
+    <div class="content left">
       <h2 class="subTitle">NEWS</h2>
+      <a href="#" class="moraLink">more ></a>
     </div>
-    <div class="news-content02">
-      <ul>
-        <li><a href="#">
-            <div class="news-tr">
-              <div class="news-td-date">2025-04-01</div>
-              <div class="news-td-title">新メニュー登場！</div>
-              <div class="news-td-img">
-                <div></div>
-              </div>
-              <div class="news-td-more">more > </div>
-            </div>
-          </a></li>
-        <li><a href="#">
-            <div class="news-tr">
-              <div class="news-td-date">2025-03-25</div>
-              <div class="news-td-title">春のキャンペーン開始</div>
-              <div class="news-td-img">
-                <div></div>
-              </div>
-              <div class="news-td-more">more > </div>
-            </div>
-          </a></li>
-        <li><a href="#">
-            <div class="news-tr">
-              <div class="news-td-date">2025-03-20</div>
-              <div class="news-td-title">新店舗オープン</div>
-              <div class="news-td-img"></div>
-              <div class="news-td-more">more > </div>
-            </div>
-          </a></li>
-      </ul>
+    <div class="content right">
+      <a href="#">
+        <div class="news-tr">
+          <div class="td-left">
+            <div class="td-date">2025-04-01</div>
+            <div class="td-title">新メニュー登場！</div>
+          </div>
+          <div class="td-img">
+            <div></div>
+          </div>
+          <div class="td-more">more > </div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="news-tr">
+          <div class="td-date">2025-03-25</div>
+          <div class="td-title">春のキャンペーン開始</div>
+          <div class="td-img">
+            <div></div>
+          </div>
+          <div class="td-more">more > </div>
+        </div>
+      </a>
+      <a href="#">
+        <div class="news-tr">
+          <div class="td-date">2025-03-20</div>
+          <div class="td-title">新店舗オープン</div>
+          <div class="td-img"></div>
+          <div class="td-more">more > </div>
+        </div>
+      </a>
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" class="flexbox">
     <div class="content left">
       <h2 class="subTitle">ABOUT</h2>
       <div>
         <p>こだわりの素材</p>
         <p>こだわりの素材で私たちはラーメンを作っており、<br>
           私たちはこだわりの素材で、ラーメンを作っております。</p>
-        <a href="#">more ></a>
+        <a href="#" class="moraLink">more ></a>
       </div>
     </div>
-    <div class="content">
+    <div class="content right">
       <div class="placeholder"></div>
     </div>
   </section>
 
   <section id="service">
-    <div class="content left">
+    <div class="content top">
       <h2 class="subTitle">SERVICE</h2>
       <p>素材にこだわって作っています。</p>
-      <a href="#">more ></a>
     </div>
-    <div class="service-items">
+    <div class="content middle">
       <div class="service-item service-img1">
         <div class="service-title">
           <h4>麺</h4>
@@ -143,53 +145,52 @@
           <a href="#">more ></a>
         </div>
       </div>
+
+    </div>
+    <div class="content bottom">
+      <a href="#" class="moraLink">more ></a>
     </div>
   </section>
 
   <section id="furture">
-    <h2 class="subTitle">FURTURE</h2>
-    <div class="content1">
-      <table>
-        <tr class="furture-item">
-          <td class="furture-item-left">
-            <p>未来のラーメン</p>
-            <div class="arrow">↓</div>
-          </td>
-          <td class="furture-item-right">
-            <p>私たちは新しいラーメンを探求し続けます。<br>
-              常に探求続けます。</p>
-          </td>
-        </tr>
-        <tr class="furture-item">
-          <td class="furture-item-left">
-            <p>革新のスープ</p>
-            <div class="arrow">↓</div>
-          </td>
-          <td class="furture-item-right">
-            <p>独自の技術でスープを進化させます。<br>
-              ずっと進化させます。</p>
-          </td>
-        </tr>
-        <tr class="furture-item">
-          <td class="furture-item-left">
-            <p>世界展開</p>
-          </td>
-          <td class="furture-item-right">
-            <p>世界中にRARMENの味を届けます。<br>
-              どこへでも届けます。</p>
-          </td>
-        </tr>
-      </table>
+    <div class="content top">
+      <h2 class="subTitle">FURTURE</h2>
     </div>
-    <div class="content2">
-      <a href="#">more ></a>
+    <div class="content middle">
+      <div class="table">
+        <div class="cell">未来のラーメン</div>
+        <div class="cell cell-right">
+          <p>私たちは新しいラーメンを探求し続けます。<br>
+            常に探求続けます。</p>
+        </div>
+        <div class="cell arrow">↓</div>
+
+        <div class="cell">革新のスープ</div>
+        <div class="cell cell-right">
+          <p>独自の技術でスープを進化させます。<br>
+            ずっと進化させます。</p>
+        </div>
+        <div class="cell arrow">↓</div>
+
+        <div class="cell">世界展開</div>
+        <div class="cell cell-right">
+          <p>世界中にRARMENの味を届けます。<br>
+            どこへでも届けます。</p>
+        </div>
+        <div class="cell arrow">↓</div>
+      </div>
+
+    </div>
+    <div class="content bottom">
+      <a href="#" class="moraLink">more ></a>
     </div>
   </section>
 
   <section id="topics">
-    <h2 class="subTitle">TOPICS</h2>
-
-    <div class="slider-wrapper">
+    <div class="content top">
+      <h2 class="subTitle">TOPICS</h2>
+    </div>
+    <div class="content middle">
       <div class="slider-container">
         <div class="slide">
           <div class="slide-item">
@@ -261,12 +262,16 @@
       <button class="imag-nav slide-prev">←</button>
       <button class="imag-nav slide-next">→</button>
     </div>
-
+    <div class="content bottom">
+      <a href="#" class="moraLink">more ></a>
+    </div>
   </section>
 
   <section id="company">
-    <h2 class="subTitle">COMPANY</h2>
-    <p>会社概要: RARMEN 株式会社</p>
+    <div class="content top">
+      <h2 class="subTitle">COMPANY</h2>
+      <p>会社概要: RARMEN 株式会社</p>
+    </div>
   </section>
 
   <footer>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>スクロールでボール積み</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 3000px;
+      /* スクロールするために高さを確保 */
+    }
+
+    /* 固定されたボールコンテナ */
+    .ball-background {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      /* ユーザー操作を妨げない */
+      z-index: -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-end;
+      transform: rotate(180deg);
+    }
+
+    .ball {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffe680, #ffcc00);
+      margin: 3px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      font-weight: bold;
+      font-size: 18px;
+      color: #8b6f00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pop 0.3s ease-out;
+      transform: rotate(180deg);
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.2);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+
+    section {
+      height: 100vh;
+    }
+
+    .title {
+      position: sticky;
+      top: 0;
+      padding: 35px 0 0 0;
+      margin: 0;
+      z-index: 10;
+    }
+
+    .title h2 {
+      height: 40px;
+      padding: 7px 0 5px 10px;
+      margin: 0 0 0 160px;
+      font-size: 24px;
+      border-bottom: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ball-background" id="ballBg"></div>
+
+
+  <section id="section1">
+    <div class="title">
+      <h2>Top</h2>
+    </div>
+  </section>
+  <section id="section2">
+    <div class="title">
+      <h2>News</h2>
+    </div>
+  </section>
+  <section id="section3">
+    <div class="title">
+      <h2>About</h2>
+    </div>
+  </section>
+  <section id="section4">
+    <div class="title">
+      <h2>Service</h2>
+    </div>
+  </section>
+  <section id="section5">
+    <div class="title">
+      <h2>Topic</h2>
+    </div>
+  </section>
+  <section id="section6">
+    <div class="title">
+      <h2>Future</h2>
+    </div>
+  </section>
+
+
+  <div>
+    <a href="../sample.html">サンプルページに戻る</a>
+  </div>
+
+  <script>
+    let lastScroll = 0;
+    const ballBg = document.getElementById("ballBg");
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > lastScroll) {
+        addMoneyBall();
+      }
+
+      lastScroll = currentScroll;
+    });
+
+    function addMoneyBall() {
+      const ball = document.createElement("div");
+      ball.classList.add("ball");
+      ball.textContent = "¥";
+      ballBg.appendChild(ball);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>風のWebサイト</title>
+  <style>
+    /* 基本リセット・全体設定 */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: none;
+      color: #333;
+    }
+
+    /* スペーサー：セクション間の視点移動表現 */
+    .spacer {
+      height: 100vh;
+    }
+
+    /* セクション */
+    .section {
+      min-height: 100vh;
+      padding: 100px 20px 60px;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* セクション内のタイトル（h2）は非表示。固定タイトルで表示 */
+    .section h2 {
+      display: none;
+    }
+
+    /* タイトル（固定表示） */
+    .fixed-title {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .title-fade-in {
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .title-fade-in.visible {
+      opacity: 1;
+    }
+
+
+    /* テキスト：共通フェードイン（少し下から） */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* 背景レイヤー */
+    .bg-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .bg-layer.visible {
+      opacity: 1;
+    }
+
+    /* 各セクションの背景テーマ */
+    .bg-top {
+      background: linear-gradient(to right, #ffffff, #ccefff);
+    }
+
+    .bg-news {
+      background: linear-gradient(to right, #fff6e5, #ffeaea);
+    }
+
+    .bg-layer.bg-about {
+      background: linear-gradient(120deg, #e2ffe2, #ccf5ff);
+    }
+
+    .bg-layer.bg-service {
+      background: linear-gradient(120deg, #f9e2ff, #e2f0ff);
+    }
+
+    .bg-layer.bg-topic {
+      background: linear-gradient(120deg, #e0ffea, #e0ffff);
+    }
+
+    .bg-layer.bg-future {
+      background: linear-gradient(120deg, #fffbe2, #d6f5e1);
+    }
+
+    .bg-layer.bg-address {
+      background: linear-gradient(120deg, #eaeaff, #f0f8ff);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 背景レイヤー -->
+  <div id="bg-layer" class="bg-layer"></div>
+
+  <!-- 固定タイトル表示 -->
+  <div id="fixed-title" class="fixed-title"></div>
+
+  <!-- スペーサー -->
+  <div class="spacer"></div>
+
+  <!-- Topセクション -->
+  <section class="section top" id="top" data-bg="bg-top">
+    <h2>風が舞いはじめる</h2>
+    <div class="content">
+      <p>静かに、しかし確かに風が動き始めた。<br>ここから物語が始まります。</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <!-- Newsセクション -->
+  <section class="section news" id="news" data-bg="bg-news">
+    <h2>風に乗って届く便り</h2>
+    <div class="content">
+      <p>風に乗って、遠くから小さな便りが届く。<br>何気ない言葉が、心を動かす。</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+  <!-- 
+  <section class="section about" data-bg="bg-about">
+    <h2>風が吹く理由</h2>
+    <div class="content">
+      <p>なぜ風は吹くのか？</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="section service" data-bg="bg-service">
+    <h2>つながりを形にする</h2>
+    <div class="content">
+      <p>風が人をつなぎます。</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="section topic" data-bg="bg-topic">
+    <h2>種が飛び、新しい発見へ</h2>
+    <div class="content">
+      <p>風に運ばれた種が新たな発見を。</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="section future" data-bg="bg-future">
+    <h2>風が運ぶこれから</h2>
+    <div class="content">
+      <p>風が導く未来へ。</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <section class="section address" data-bg="bg-address">
+    <h2>根ざし、再び風に乗る場所</h2>
+    <div class="content">
+      <p>風がまたここから始まります。</p>
+    </div>
+  </section> -->
+
+  <script>
+    const animationSettings = {
+      top: {
+        titleClass: 'title-fade-in',
+        textClass: 'fade-in-up',
+        bgClass: 'bg-fade-soft'
+      },
+      news: {
+        titleClass: 'title-fade-in',
+        textClass: 'fade-in-up',
+        bgClass: 'bg-fade-fast'
+      },
+      // 他セクションも追加可能
+    };
+
+    function getAnimationSetting(sectionId) {
+      return animationSettings[sectionId] || {
+        titleClass: 'title-fade-in',
+        textClass: 'fade-in-up'
+      };
+    }
+
+    const sections = document.querySelectorAll('.section');
+    const fixedTitle = document.getElementById('fixed-title');
+    const bgLayer = document.getElementById('bg-layer');
+    let currentBgClass = "";
+    let isTransitioning = false;
+
+    /* セクションアニメーション（テキスト） */
+    function animateText(section, textClass) {
+      const texts = section.querySelectorAll('.content p');
+      texts.forEach((el, i) => {
+        el.classList.add(textClass);
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, i * 200);
+      });
+    }
+
+    /* タイトル表示 */
+    function showFixedTitle(text, titleClass) {
+      fixedTitle.textContent = text;
+      fixedTitle.className = `fixed-title ${titleClass} visible`;
+    }
+
+    /* タイトル非表示 */
+    function hideFixedTitle() {
+      fixedTitle.classList.remove('visible');
+    }
+
+    /* 背景切り替え */
+    function switchBackground(bgClass) {
+      if (bgClass !== currentBgClass && !isTransitioning) {
+        isTransitioning = true;
+        bgLayer.classList.remove('visible');
+
+        setTimeout(() => {
+          if (currentBgClass) bgLayer.classList.remove(currentBgClass);
+          bgLayer.classList.add(bgClass);
+          currentBgClass = bgClass;
+          bgLayer.classList.add('visible');
+
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 1000);
+        }, 400);
+      }
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const section = entry.target;
+        const sectionId = section.id;
+        const h2 = section.querySelector('h2');
+        const titleText = h2 ? h2.textContent : '';
+        const bgClass = section.getAttribute('data-bg');
+
+        // アニメーション設定を取得
+        const { titleClass, textClass } = getAnimationSetting(sectionId);
+
+        if (entry.isIntersecting) {
+          section.classList.add('visible');
+          showFixedTitle(titleText, titleClass);
+          animateText(section, textClass);
+          switchBackground(bgClass);
+        } else {
+          section.classList.remove('visible');
+          hideFixedTitle();
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+
+  </script>
+</body>
+
+</html>

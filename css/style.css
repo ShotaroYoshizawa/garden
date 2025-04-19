@@ -64,7 +64,7 @@ footer nav a:hover {
 }
 
 .subTitle {
-    margin: 20px 0 20px 40px;
+    margin: 20px 0;
     font-size: 36px;
 }
 
@@ -86,7 +86,7 @@ footer nav a:hover {
     /* タイトルを前面に表示するために後ろに下げる */
 }
 
-.top-title {
+#top .title {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -96,51 +96,75 @@ footer nav a:hover {
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.top-title h1 {
+#top .title h1 {
     font-size: 60px;
     margin-bottom: 20px;
 }
 
-/* #data {
-    display: flex;
-    align-items: flex-start;
-} */
-
-#data p {
+.content.top {
     margin-left: 40px;
+}
+
+.content.bottom {
+    padding: 20px 0;
+}
+
+.moraLink {
+    display: block;
+    text-align: center;
+    width: 80px;
+    color: #000;
+    padding: 5px 10px;
+    margin: 0 10px 0 auto;
+    border-radius: 5px;
+}
+
+.moraLink:hover {
+    color: #fff;
+    background: #ff701e;
+}
+
+.content.left {
+    margin-left: 40px;
+}
+
+.flexbox {
+    display: flex;
+}
+
+@media screen and (max-width: 480px) {
+    .content.top {
+        margin-left: 20px;
+    }
+
+    .content.left {
+        margin-left: 20px;
+    }
+
+    .flexbox {
+        display: block;
+    }
 }
 
 #news {
     background: rgb(255, 252, 153);
-    height: auto;
-    display: flex;
     padding: 0;
     border-top: 2px solid rgb(255, 247, 0);
     border-bottom: 2px solid rgb(255, 247, 0);
 }
 
+#news .content.left {
+    width: 300px;
+}
+
+#news .content.right {
+    width: 100%;
+    border-left: 2px solid rgb(255, 247, 0);
+}
+
 #news a {
     color: #222;
     text-decoration: none;
-}
-
-#news ul {
-    padding: 0;
-    margin: 0;
-}
-
-#news li {
-    list-style: none;
-}
-
-.news-content01 {
-    width: 300px;
-    height: 100%;
-}
-
-.news-content02 {
-    width: 100%;
-    border-left: 2px solid rgb(255, 247, 0);
 }
 
 .news-tr {
@@ -177,52 +201,83 @@ footer nav a:hover {
 }
 
 .news-tr div {
-    padding: 20px;
+    padding: 20px 0 20px 20px;
 }
 
-.news-td-date {
+.news-tr .td-left {
+    padding: 0;
+}
+
+.news-tr .td-date {
     width: 100px;
+    float: left;
 }
 
-.news-td-title {
-    width: 250px;
+.news-tr .td-title {
+    width: 200px;
+    float: left;
 }
 
-.news-td-img {
+.news-tr .td-img {
     width: 200px;
 }
 
-.news-td-more {
+.news-tr .td-more {
     width: 60px;
 }
 
-.news-td-img div {
+.news-tr .td-img div {
     height: 150px;
     width: 150px;
     background: gray;
 }
 
+@media screen and (max-width: 480px) {
+    #news .content.left {
+        width: auto;
+    }
+
+    .news-tr {
+        display: block;
+    }
+
+    .news-tr .td-left,
+    .news-tr .td-img {
+        float: left;
+    }
+
+    .news-tr .td-date,
+    .news-tr .td-title {
+        clear: both;
+    }
+
+    .news-tr .td-more {
+        float: right;
+        padding-top: 0;
+    }
+}
+
 #about {
     background: rgb(255, 247, 0);
-    width: 100%;
-    display: flex;
 }
 
 #about .content {
     width: 50%;
 }
 
-#about .left p {
-    padding-left: 40px;
-}
-
-#about .content .placeholder {
+#about .content.right .placeholder {
     width: 100%;
     height: 600px;
     background: gray;
 }
 
-#about a {
+@media screen and (max-width: 480px) {
+    #about .content {
+        width: auto;
+    }
+}
+
+#service .content.top a {
     color: #000;
     float: right;
     padding: 5px 10px;
@@ -230,43 +285,15 @@ footer nav a:hover {
     border-radius: 5px;
 }
 
-#about a:hover {
-    color: #ff701e;
-    background: #fff;
-}
-
-#service {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-#service .content {
-    width: 100%;
-    text-align: left;
-}
-
-#service .left p {
-    padding-left: 40px;
-}
-
-#service .left a {
-    color: #000;
-    float: right;
-    padding: 5px 10px;
-    margin: 0 10px;
-    border-radius: 5px;
-}
-
-#service .left a:hover {
+#service .content.top a:hover {
     color: #fff;
     background: #ff701e;
 }
 
-.service-items {
+#service .content.middle {
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .service-item {
@@ -352,58 +379,88 @@ footer nav a:hover {
     background: url('../img/tsuchi01.jpg') no-repeat center center;
 }
 
+@media screen and (max-width: 480px) {
+    #service .content.middle {
+        display: block;
+    }
+
+    .service-item {
+        width: 400px;
+        height: 150px;
+        margin: 0 auto;
+    }
+
+    .service-title {
+        writing-mode: horizontal-tb;
+    }
+
+    .service-detail {
+        width: 100%;
+    }
+
+    .service-item:hover {
+        width: 400px;
+        height: 400px;
+    }
+}
+
 #furture {
     background: rgb(255, 252, 153);
 }
 
-#furture .content1 {
+#furture .content.middle {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 
-.furture-item-left {
+
+#furture .table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+}
+
+#furture .cell {
     text-align: center;
-    padding: 10px 0;
+    padding: 10px;
 }
 
-.furture-item-right {
-    padding-left: 40px;
+#furture .cell-right {
+    text-align: left;
+    grid-row: span 2;
 }
 
-.arrow {
-    font-size: 24px;
-    margin-top: 10px;
+@media (max-width: 600px) {
+    #furture .table {
+        grid-template-columns: 1fr;
+    }
+
+    #furture .cell,
+    #furture .cell-right {
+        grid-row: auto;
+    }
 }
 
-#furture .content2 {
-    padding: 20px 0;
-}
-
-#furture .content2 a {
-    color: #000;
-    float: right;
-    padding: 5px 10px;
-    margin: 0 10px;
-    border-radius: 5px;
-}
-
-#furture a:hover {
-    color: #fff;
-    background: #ff701e;
-}
 
 #topics {
     background: rgb(255, 247, 0);
 }
 
-.slider-wrapper {
-    align-items: center;
-    padding: 10px;
+#topics .content.middle {
     margin: 0 auto;
     position: relative;
-    width: 100%;
+    width: 90%;
+    max-width: 900px;
+    overflow: hidden;
+    height: 400px;
+}
+
+.slider-wrapper {
+    margin: 0 auto;
+    position: relative;
+    width: 90%;
     max-width: 900px;
     overflow: hidden;
     height: 400px;
@@ -412,16 +469,15 @@ footer nav a:hover {
 .slider-container {
     display: flex;
     transition: transform 0.5s ease;
-    width: fit-content;
 }
 
-.slide {
+#topics .slide {
     width: 200px;
     height: 100%;
     margin-right: 10px;
 }
 
-.img {
+#topics .img {
     width: 200px;
     height: 145px;
     border-radius: 10px;
@@ -467,12 +523,12 @@ footer nav a:hover {
 }
 
 .slide-item a {
-    color:#000;
+    color: #000;
     text-decoration: none;
     transition: transform 0.3s ease;
 }
 
-.slide-item a:hover{
+.slide-item a:hover {
     transform: scale(1.05, 1.05);
 }
 
@@ -510,10 +566,7 @@ footer nav a:hover {
     right: 10px;
 }
 
+
 /* #company {
     text-align: center;
 } */
-
-#company p {
-    margin-left: 40px;
-}

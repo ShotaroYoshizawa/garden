@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>リンク付きレスポンシブグループ</title>
+  <style>
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .link-block {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #ccc;
+      border: 2px solid #666;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #f0f0f0;
+    }
+
+    .cell {
+      background: #fff;
+      padding: 16px;
+      text-align: center;
+      box-sizing: border-box;
+      font-weight: bold;
+    }
+
+    .group:hover {
+      background-color: #e0e0ff;
+    }
+
+    /* スマホ表示 */
+    @media (max-width: 600px) {
+      .group {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+          "a c"
+          "b c"
+          "d c";
+      }
+
+      .a { grid-area: a; }
+      .b { grid-area: b; }
+      .c { grid-area: c; }
+      .d { grid-area: d; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- グループ1 -->
+    <a href="https://example.com/group1" class="link-block">
+      <div class="group">
+        <div class="cell a">111</div>
+        <div class="cell b">222</div>
+        <div class="cell c">333</div>
+        <div class="cell d">444</div>
+      </div>
+    </a>
+
+    <!-- グループ2 -->
+    <a href="https://example.com/group2" class="link-block">
+      <div class="group">
+        <div class="cell a">111111111111111111111111111111111111111111111111</div>
+        <div class="cell b">222</div>
+        <div class="cell c">333</div>
+        <div class="cell d">444</div>
+      </div>
+    </a>
+
+    <!-- グループ3 -->
+    <a href="https://example.com/group3" class="link-block">
+      <div class="group">
+        <div class="cell a">111</div>
+        <div class="cell b">222</div>
+        <div class="cell c">333</div>
+        <div class="cell d">444</div>
+      </div>
+    </a>
+  </div>
+
+</body>
+</html>
